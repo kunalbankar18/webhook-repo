@@ -14,11 +14,15 @@
       container.innerHTML = '';
       data.forEach(item => {
         let msg = '';
-        if (item.action === 'PUSH') {
+        const action = item.action.toUpperCase();
+
+        if (action === 'PUSH') {
           msg = `${item.author} pushed to ${item.to_branch} on ${item.timestamp}`;
-        } else if (item.action === 'PULL_REQUEST') {
-          msg = `${item.author} submitted a pull request from ${item.from_branch} to ${item.to_branch} on ${item.timestamp}`;
-        } else if (item.action === 'MERGE') {
+        } else if (action === 'OPENED') {
+          msg = `${item.author} opened a pull request from ${item.from_branch} to ${item.to_branch} on ${item.timestamp}`;
+        } else if (action === 'CLOSED') {
+          msg = `${item.author} closed a pull request from ${item.from_branch} to ${item.to_branch} on ${item.timestamp}`;
+        } else if (action === 'MERGE') {
           msg = `${item.author} merged branch ${item.from_branch} to ${item.to_branch} on ${item.timestamp}`;
         }
         const div = document.createElement('div');
